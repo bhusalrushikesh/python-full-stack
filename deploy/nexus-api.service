@@ -5,9 +5,10 @@ After=network.target
 [Service]
 User=ubuntu
 Group=ubuntu
-WorkingDirectory=/var/www/nexus/backend
-EnvironmentFile=/var/www/nexus/backend/.env
-ExecStart=/usr/bin/python3 -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+WorkingDirectory=/home/ubuntu/backend
+EnvironmentFile=/home/ubuntu/backend/.env
+# Must listen on 0.0.0.0 so frontend EC2 can reach this host
+ExecStart=/usr/bin/python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 Restart=always
 RestartSec=3
 
